@@ -10,3 +10,7 @@ wheels/
 .venv
 
 .idea
+.env
+alembic.ini
+todos.db
+uv.lock

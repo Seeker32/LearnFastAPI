@@ -1,7 +1,7 @@
 from .config import settings
 from .database import engine, create_db_and_tables, get_session
 from .models import Todo, TodoBase, TodoCreate, TodoRead, TodoUpdate
-from .crud import (
+from .service import (
     create_todo,
     list_todos,
     get_todo,

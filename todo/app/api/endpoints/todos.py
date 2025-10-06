@@ -5,7 +5,7 @@ from typing import Any
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlmodel import Session
 
-from ...crud import (
+from ...service import (
     create_todo,
     get_todo,
     list_todos,
