@@ -13,7 +13,7 @@ from ...service import (
     authenticate_user,
 )
 from ...dependencies import get_session
-from ...models import UserCreate, UserRead, UserUpdate, ApiResponse, success_response, error_response
+from ...models import UserCreate, UserRead, UserUpdate, ApiResponse, success_response
 
 router = APIRouter()
 
