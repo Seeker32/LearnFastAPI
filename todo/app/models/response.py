@@ -1,14 +1,9 @@
 """Standard API response models."""
 
-from typing import Generic, TypeVar
-
 from pydantic import Field
 from sqlmodel import SQLModel
 
-DataT = TypeVar("DataT")
-
-
-class ApiResponse(SQLModel, Generic[DataT]):
+class ApiResponse[DataT](SQLModel):
     """Standard API response wrapper."""
 
     code: int = Field(..., description="Response code")

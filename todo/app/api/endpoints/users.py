@@ -13,9 +13,12 @@ from ...service import (
     authenticate_user,
 )
 from ...dependencies import get_session
+<<<<<<< HEAD
 from ...models import UserCreate, UserRead, UserUpdate, ApiResponse, success_response, error_response, Token, LoginRequest
 from ...security import create_access_token
 from ...config import settings
+=======
+>>>>>>> 64e78523103e901714f2934a06f7dae18c56aedf
 
 router = APIRouter()
 
