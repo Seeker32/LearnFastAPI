@@ -11,5 +11,6 @@ dependencies = [
     "fastapi[standard]>=0.117.1",
     "psycopg[binary]>=3.2.10",
     "python-dotenv>=1.1.1",
+    "python-jose[cryptography]>=3.5.0",
     "sqlmodel>=0.0.25",
 ]

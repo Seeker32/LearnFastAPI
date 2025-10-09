@@ -24,5 +24,10 @@ class Settings:
     # Key (hash) length in bytes
     key_length: int = int(os.getenv("KEY_LENGTH", "32"))
 
+    # JWT configuration
+    jwt_secret_key: str = os.getenv("JWT_SECRET_KEY", "change-this-in-production")
+    jwt_algorithm: str = os.getenv("JWT_ALGORITHM", "HS256")
+    access_token_expires_minutes: int = int(os.getenv("ACCESS_TOKEN_EXPIRES_MINUTES", "60"))
+
 
 settings = Settings()

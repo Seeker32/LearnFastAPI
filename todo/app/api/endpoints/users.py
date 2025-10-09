@@ -13,7 +13,9 @@ from ...service import (
     authenticate_user,
 )
 from ...dependencies import get_session
-from ...models import UserCreate, UserRead, UserUpdate, ApiResponse, success_response, error_response
+from ...models import UserCreate, UserRead, UserUpdate, ApiResponse, success_response, error_response, Token, LoginRequest
+from ...security import create_access_token
+from ...config import settings
 
 router = APIRouter()
 
@@ -167,4 +169,31 @@ def authenticate_user_endpoint(
         )
     
     return success_response(data=user, msg="Authentication successful")
+
+
+@router.post(
+    "/login",
+    response_model=ApiResponse[Token],
+    summary="User login with JWT",
+)
+def login(
+    credentials: LoginRequest,
+    session: Session = Depends(get_session),
+) -> ApiResponse[Token]:
+    user = authenticate_user(session, credentials.username, credentials.password)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid username or password",
+        )
+    if user.is_delete:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User account has been deleted",
+        )
+
+    access_token = create_access_token(subject=user.id, extra_claims={"username": user.username})
+    expires_in_seconds = settings.access_token_expires_minutes * 60
+    token = Token(access_token=access_token, token_type="bearer", expires_in=expires_in_seconds)
+    return success_response(data=token, msg="Login successful")
 
